@@ -1,0 +1,11 @@
+[Service]
+Host = "0.0.0.0"
+Port = 48077
+JwtKey = "00f5cd91-d372-46eb-b9cc-21b33f6cd976"
+
+[Database]
+Host = "192.168.10.201"
+Port = 27017
+DatabaseName = "disk-mgr"
+Username = ""
+Password = ""

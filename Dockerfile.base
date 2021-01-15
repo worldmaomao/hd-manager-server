@@ -1,0 +1,10 @@
+ARG BASE=golang:1.14.13-alpine
+
+FROM ${BASE} AS builder
+
+RUN apk update \\
+    && apk add --no-cache \
+        build-base \
+        make
+
+
