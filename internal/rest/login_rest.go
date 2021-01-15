@@ -9,7 +9,7 @@ import (
 	"worldmaomao/harddisk/internal/vo"
 )
 
-func loadAuthRouter(group *gin.RouterGroup, container di.Container) {
+func loadNoAuthRouter(group *gin.RouterGroup, container di.Container) {
 	group.POST("/login", NewHandlerWrapper(container).handle(login))
 }
 

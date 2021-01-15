@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<head>
+    <meta charset="UTF-8">
+    <title>{{.title}}</title>
+</head>
+<style>
+    body {
+        font: normal 100% Helvetica, Arial, sans-serif;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    small {
+        font-size: 0.875em;
+    }
+
+    .center {
+        width: 95%;
+        margin: auto;
+        text-align: center;
+    }
+
+    .searchResultTable {
+        margin: auto;
+    }
+
+    table, table tr th, table tr td {
+        border: 1px solid #0094ff;
+    }
+
+    .searchItemName {
+        text-align: left;
+    }
+
+</style>
+<body>
+
+<div class="center">
+    <h1 style="color: cornflowerblue">{{ .title }}</h1>
+    <form method="post" , action="index.html">
+        <input name="isSearch" type="hidden" value="true">
+        关键字：<input name="keyword" value="{{.keyword}}" type="text">
+        <button>搜索</button>
+    </form>
+</div>
+
+{{if eq  .isSearch "true"}}
+    <div class="center">
+        <h3>搜索结果：</h3>
+        {{ if not .searchItemList }}
+            <b style="color: red">没有数据</b>
+        {{ else }}
+            <div>
+                结果总数:{{ .searchCount }}
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="index.html?isSearch=true&keyword={{.keyword}}&pageSize={{.pageSize}}&page={{.prePage}}">上一页</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="index.html?isSearch=true&keyword={{.keyword}}&pageSize={{.pageSize}}&page={{.nextPage}}">下一页</a>
+            </div>
+
+            <table class="searchResultTable">
+                <thead style="background-color: #e4e4e4">
+                <tr>
+                    <td>文件名</td>
+                    <td>硬盘</td>
+                </tr>
+                </thead>
+                {{ range .searchItemList }}
+                    <tr>
+                        <td class="searchItemName">
+                            {{ .FileName }}
+                        </td>
+                        <td>
+                            {{ .DiskName }}
+                        </td>
+                    </tr>
+                {{ end }}
+            </table>
+            <div>
+                结果总数:{{ .searchCount }}
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="index.html?isSearch=true&keyword={{.keyword}}&pageSize={{.pageSize}}&page={{.prePage}}">上一页</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="index.html?isSearch=true&keyword={{.keyword}}&pageSize={{.pageSize}}&page={{.nextPage}}">下一页</a>
+            </div>
+        {{ end }}
+
+    </div>
+{{end}}
+
+
+</body>
+</html>
