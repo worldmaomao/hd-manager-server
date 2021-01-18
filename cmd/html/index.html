@@ -55,14 +55,7 @@
         {{ if not .searchItemList }}
             <b style="color: red">没有数据</b>
         {{ else }}
-            <div>
-                结果总数:{{ .searchCount }}
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="index.html?isSearch=true&keyword={{.keyword}}&pageSize={{.pageSize}}&page={{.prePage}}">上一页</a>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="index.html?isSearch=true&keyword={{.keyword}}&pageSize={{.pageSize}}&page={{.nextPage}}">下一页</a>
-            </div>
-
+            {{template "page_bar.html" .}}
             <table class="searchResultTable">
                 <thead style="background-color: #e4e4e4">
                 <tr>
@@ -81,13 +74,7 @@
                     </tr>
                 {{ end }}
             </table>
-            <div>
-                结果总数:{{ .searchCount }}
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="index.html?isSearch=true&keyword={{.keyword}}&pageSize={{.pageSize}}&page={{.prePage}}">上一页</a>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="index.html?isSearch=true&keyword={{.keyword}}&pageSize={{.pageSize}}&page={{.nextPage}}">下一页</a>
-            </div>
+            {{template "page_bar.html".}}
         {{ end }}
 
     </div>

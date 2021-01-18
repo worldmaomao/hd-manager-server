@@ -3,6 +3,7 @@ package rest
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/sarulabs/di"
+	"math"
 	"net/http"
 	"strconv"
 	"worldmaomao/harddisk/internal/service"
@@ -28,6 +29,7 @@ func search(c *gin.Context, container di.Container) error {
 		pageSize       int
 		nextPage       int
 		prePage        int
+		totalPage      int
 		searchCount    int
 		searchItemList []vo.DiskItemVo
 		itemService    = service.NewDiskItemService(container)
@@ -52,6 +54,7 @@ func search(c *gin.Context, container di.Container) error {
 	if isSearch == "true" {
 		searchCount, _ = itemService.QueryItemCount("", keyword)
 		searchItemList, _ = itemService.QueryItem("", keyword, page, pageSize)
+		totalPage = int(math.Ceil(float64(searchCount) / float64(pageSize)))
 	}
 	c.HTML(http.StatusOK, "index.html", gin.H{
 		"title":          "硬盘文件搜索",
@@ -63,6 +66,7 @@ func search(c *gin.Context, container di.Container) error {
 		"pageSize":       pageSize,
 		"searchItemList": searchItemList,
 		"searchCount":    searchCount,
+		"totalPage":      totalPage,
 	})
 	return nil
 }

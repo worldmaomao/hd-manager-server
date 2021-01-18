@@ -1,0 +1,23 @@
+<div>
+    结果总数:{{ .searchCount }}
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    总页数：{{ .totalPage }}
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    当前页: {{ .page }}
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    {{ if ne .page 1 }}
+        <a href="index.html?isSearch=true&keyword={{.keyword}}&pageSize={{.pageSize}}&page=1">首页</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+    {{ end }}
+    {{ if ne .page 1 }}
+        <a href="index.html?isSearch=true&keyword={{.keyword}}&pageSize={{.pageSize}}&page={{.prePage}}">上一页</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+    {{ end }}
+    {{ if ne .totalPage .page }}
+        <a href="index.html?isSearch=true&keyword={{.keyword}}&pageSize={{.pageSize}}&page={{.nextPage}}">下一页</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+    {{ end }}
+    {{ if ne .totalPage .page }}
+        <a href="index.html?isSearch=true&keyword={{.keyword}}&pageSize={{.pageSize}}&page={{.totalPage}}">尾页</a>
+    {{ end }}
+</div>
