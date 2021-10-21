@@ -7,6 +7,7 @@ import (
 	"worldmaomao/harddisk/internal/config"
 	"worldmaomao/harddisk/internal/constant"
 	"worldmaomao/harddisk/internal/rest/middlewares"
+	"worldmaomao/harddisk/internal/utils"
 )
 
 type server struct {
@@ -23,7 +24,8 @@ func (server *server) Start() {
 	config := server.container.Get(constant.Configuration).(*config.Configuration)
 	address := fmt.Sprintf("%s:%d", config.Service.Host, config.Service.Port)
 	r := gin.Default()
-	r.LoadHTMLGlob("html/*")
+	path := utils.GetExecuteFileDir()
+	r.LoadHTMLGlob(path + "/html/*")
 	r.Use(gin.Logger())
 	r.Use(middlewares.NewRecovery())
 	r.Use(middlewares.NewCors([]string{"*"}))

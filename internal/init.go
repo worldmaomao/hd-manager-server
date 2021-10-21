@@ -8,6 +8,7 @@ import (
 	"worldmaomao/harddisk/internal/database"
 	"worldmaomao/harddisk/internal/rest"
 	"worldmaomao/harddisk/internal/service"
+	"worldmaomao/harddisk/internal/utils"
 
 	"github.com/BurntSushi/toml"
 	"github.com/sarulabs/di"
@@ -20,8 +21,10 @@ var (
 func loadConfig() (*config.Configuration, error) {
 	var (
 		config config.Configuration
+		err    error
 	)
-	_, err := toml.DecodeFile("./res/configuration.toml", &config)
+	path := utils.GetExecuteFileDir()
+	_, err = toml.DecodeFile(path+"/res/configuration.toml", &config)
 	if err != nil {
 		return nil, err
 	}
